@@ -1,0 +1,52 @@
+workflows:
+  android-release:
+    name: Lane Rush APK + AAB
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      java: 17
+      android_signing:
+        - lane_rush_upload
+    scripts:
+      - name: Prepare Android build files
+        script: |
+          FLUTTER_BIN="$(command -v flutter)"
+          FLUTTER_SDK="$(cd "$(dirname "$FLUTTER_BIN")/.." && pwd)"
+          printf 'flutter.sdk=%s\n' "$FLUTTER_SDK" > android/local.properties
+
+          mkdir -p android/gradle/wrapper
+          if [ ! -f android/gradle/wrapper/gradle-wrapper.jar ]; then
+            TMP_DIR="$(mktemp -d)"
+            flutter create --platforms=android --org com.lanerush --project-name wrapper_helper "$TMP_DIR/wrapper_helper"
+            cp "$TMP_DIR/wrapper_helper/android/gradle/wrapper/gradle-wrapper.jar" android/gradle/wrapper/gradle-wrapper.jar
+            rm -rf "$TMP_DIR"
+          fi
+          chmod +x android/gradlew
+
+          if [ -n "$CM_KEYSTORE_PATH" ]; then
+            cat > android/key.properties <<KEYEOF
+          storePassword=$CM_KEYSTORE_PASSWORD
+          keyPassword=$CM_KEY_PASSWORD
+          keyAlias=$CM_KEY_ALIAS
+          storeFile=$CM_KEYSTORE_PATH
+          KEYEOF
+          else
+            echo "Codemagic signing identity lane_rush_upload is missing." >&2
+            exit 1
+          fi
+
+      - name: Flutter packages
+        script: flutter pub get
+
+      - name: Analyze
+        script: flutter analyze --no-fatal-warnings --no-fatal-infos
+
+      - name: Build signed APK
+        script: flutter build apk --release
+
+      - name: Build signed AAB
+        script: flutter build appbundle --release
+
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+      - build/app/outputs/bundle/release/app-release.aab
