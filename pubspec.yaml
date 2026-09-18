@@ -1,0 +1,23 @@
+name: lane_rush_traffic_escape
+description: Lane Rush Traffic Escape - three-mode arcade traffic racer.
+publish_to: 'none'
+version: 1.0.1+2
+
+environment:
+  sdk: '>=3.11.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flame: ^1.38.2
+  flame_audio: ^2.12.2
+  shared_preferences: ^2.5.5
+  google_mobile_ads: ^9.1.0
+  in_app_purchase: ^3.3.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/cars/
+    - assets/images/ui/
+    - assets/audio/

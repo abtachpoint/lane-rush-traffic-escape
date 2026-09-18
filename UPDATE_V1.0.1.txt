@@ -1,0 +1,19 @@
+Lane Rush: Traffic Escape v1.0.1
+=================================
+
+Requested UI/control update:
+- Moved Speedometer and Nitro into the left-side gameplay area.
+- Added dedicated LEFT and RIGHT lane buttons.
+- Lane change happens immediately on button press.
+- Full-screen tap control also responds on touch-down; swipe remains available.
+- Brake stays available at the bottom center.
+- Shop FREE COINS subtitle is now only: Watch Ad.
+- Removed visible Google Play product IDs from coin packs.
+- Removed hardcoded fallback coin-pack prices from the app UI/model.
+- Coin pack buttons now show Google Play localized price when loaded, otherwise BUY.
+- Remove Ads card now shows only REMOVE ADS; removed rewarded-ad subtitle.
+- Gradle wrapper updated to 8.14.
+- Kotlin plugin updated to 2.2.20.
+- App version updated to 1.0.1+2.
+
+No login system was added. Other gameplay/features remain unchanged.
