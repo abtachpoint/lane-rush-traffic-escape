@@ -1,8 +1,0 @@
-import 'package:flutter/material.dart';
-import '../services/audio_service.dart';
-import '../services/game_store.dart';
-import '../services/purchase_service.dart';
-import 'privacy_screen.dart';
-
-class SettingsScreen extends StatefulWidget{const SettingsScreen({super.key});@override State<SettingsScreen> createState()=>_SettingsScreenState();}
-class _SettingsScreenState extends State<SettingsScreen>{final store=GameStore.instance;@override void initState(){super.initState();store.addListener(_r);}@override void dispose(){store.removeListener(_r);super.dispose();}void _r(){if(mounted)setState((){});} @override Widget build(BuildContext context)=>Scaffold(appBar:AppBar(title:const Text('SETTINGS')),body:ListView(children:[SwitchListTile(title:const Text('Music'),subtitle:const Text('Arcade racing background loop'),value:store.musicOn,onChanged:(v)async{await store.setMusic(v);await AudioService.instance.refreshMusic();}),SwitchListTile(title:const Text('Sound Effects'),value:store.soundOn,onChanged:store.setSound),SwitchListTile(title:const Text('Vibration'),subtitle:const Text('Reserved for supported devices'),value:store.vibrationOn,onChanged:store.setVibration),const Divider(),ListTile(leading:const Icon(Icons.restore_rounded),title:const Text('Restore Purchases'),subtitle:const Text('Restores Remove Ads. Consumable coin packs are not restored.'),onTap:PurchaseService.instance.restorePurchases),ListTile(leading:const Icon(Icons.privacy_tip_rounded),title:const Text('Privacy Policy'),onTap:()=>Navigator.push(context,MaterialPageRoute(builder:(_)=>const PrivacyScreen()))),const AboutListTile(icon:Icon(Icons.info_outline_rounded),applicationName:'Lane Rush: Traffic Escape',applicationVersion:'1.0.0',applicationLegalese:'© 2026 Lane Rush') ]));}
