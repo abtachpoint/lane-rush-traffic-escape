@@ -1,7 +1,7 @@
 name: lane_rush_traffic_escape
 description: Lane Rush Traffic Escape - three-mode arcade traffic racer.
 publish_to: 'none'
-version: 1.0.2+3
+version: 1.0.2+4
 
 environment:
   sdk: '>=3.11.0 <4.0.0'
