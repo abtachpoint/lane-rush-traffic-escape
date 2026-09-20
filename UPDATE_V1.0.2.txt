@@ -1,0 +1,16 @@
+Lane Rush: Traffic Escape v1.0.2+3
+
+Changes:
+- Added production AdMob App ID.
+- Added production Rewarded Ad Unit ID.
+- Added production Interstitial Ad Unit ID.
+- Disabled Google sample/test ad unit IDs for release builds.
+- Version updated from 1.0.1+2 to 1.0.2+3.
+
+AdMob IDs:
+App ID: ca-app-pub-1379059201302335~5583150030
+Rewarded: ca-app-pub-1379059201302335/7488837653
+Interstitial: ca-app-pub-1379059201302335/7381026447
+
+Important:
+Use an AdMob test device when personally testing ads. Do not repeatedly interact with your own live ads.
